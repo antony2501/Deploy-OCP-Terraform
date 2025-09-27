@@ -5,7 +5,7 @@
 cluster_name = "my-ocp-cluster"  # Tên cluster - sẽ tạo folder /home/my-ocp-cluster
 
 # Server configuration (đã có sẵn default values)
-# server_host     = "192.168.10.20"  # IP server (default)
+# server_host     = "192.168.74.130"  # IP server (default)
 # server_user     = "root"            # Username (default)
-# server_password = "Amigo@123"       # Password (default)
+# server_password = "123"             # Password (default)
 # server_ssh_port = 22                # SSH port (default)

@@ -9,7 +9,7 @@ variable "cluster_name" {
 variable "server_host" {
   description = "IP của server"
   type        = string
-  default     = "192.168.10.20"
+  default     = "192.168.74.130"
 }
 
 variable "server_user" {
@@ -21,7 +21,7 @@ variable "server_user" {
 variable "server_password" {
   description = "Password để SSH vào server"
   type        = string
-  default     = "Amigo@123"
+  default     = "123"
 }
 
 variable "server_ssh_port" {

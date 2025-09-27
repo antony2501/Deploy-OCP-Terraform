@@ -1,6 +1,6 @@
 # Terraform: Tạo Folder Cluster trên Server
 
-Module này tạo folder với tên cluster trong `/home` trên server 192.168.10.20.
+Module này tạo folder với tên cluster trong `/home` trên server 192.168.74.130.
 
 ## Cách sử dụng:
 
@@ -30,9 +30,9 @@ terraform apply
 - Ví dụ: nếu `cluster_name = "ocp-prod"` thì folder sẽ là `/home/ocp-prod`
 
 ## Thông tin server:
-- **IP**: 192.168.10.20
+- **IP**: 192.168.74.130
 - **User**: root  
-- **Password**: Amigo@123
+- **Password**: 123
 - **SSH Port**: 22
 
 ## Ví dụ:
