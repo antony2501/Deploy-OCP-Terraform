@@ -1,0 +1,59 @@
+apiVersion: v1
+baseDomain: ${base_domain}
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: {}
+  replicas: 0
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: ${cluster_name}
+networking:
+  clusterNetwork:
+  # - cidr: 10.128.0.0/14
+  - cidr: ${machine_network_cidr}
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: ${machine_network_cidr}
+  networkType: OVNKubernetes
+  serviceNetwork:
+  # - 172.30.0.0/16
+  - ${service_network_cidr}
+platform:
+  vsphere:
+    apiVIPs:
+    # - 10.0.95.18
+    - ${api_vip}
+    failureDomains:
+    - name: generated-failure-domain
+      region: generated-region
+      server: ${vsphere_server}
+      topology:
+        computeCluster: /Amigo/host/Amigo
+        datacenter: Amigo
+        folder: /Amigo/vm/OCP-agent-base
+        datastore: /Amigo/datastore/AMIGO LAB 02
+        networks:
+        - ${vsphere_network}
+        resourcePool: /Amigo/host/Amigo/Resources
+      zone: generated-zone
+    ingressVIPs:
+    - ${ingress_vip}
+    vcenters:
+    - datacenters:
+      - Amigo
+      password: ${vsphere_password}
+      port: 443
+      server: ${vsphere_server}
+      user: ${vsphere_user}
+publish: External
+pullSecret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfMWVkM2U2YmJkM2VkNDFkYzliNmNiNzZiM2JiMzJkZWM6NkVaVE4yNkdORDVGTVNaWU9SMEY1SUoxVFJSRVlQSjQ2SkZXMTBHVEY2T1VLVE1CU0xQR1AzN0g1MDhDRTRUQw==","email":"an.tv@amigo.vn"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfMWVkM2U2YmJkM2VkNDFkYzliNmNiNzZiM2JiMzJkZWM6NkVaVE4yNkdORDVGTVNaWU9SMEY1SUoxVFJSRVlQSjQ2SkZXMTBHVEY2T1VLVE1CU0xQR1AzN0g1MDhDRTRUQw==","email":"an.tv@amigo.vn"},"registry.connect.redhat.com":{"auth":"fHVoYy1wb29sLTZjMWZjN2M4LTYxNzctNDVjMi1hMTUwLWE0YmZhNzJmZjE2MzpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTNOalEzWlRJd05tWXpOVEkwTVRrd1lXRTBNVEU0Tm1WbU4yTTFZV000WlNKOS5xREdIRGJXVHFKQXdlMjRqRVhoSTZmWTdCM0JieWJEUkY5UGJ1SDEwdlFtU3JSYzdXUG1qSGhHeHhWU2pwNUt4dUJLWTRVX3FZMV9ZTVpsOXV3OXhLR1NlWGtiMUdYYU5MZ1l4OUo4ZTlHVUVYWk1hY2hjTTBfSkNsdURiVnUzd0JhZTU3dUU2SlF3M1JkLXplSXl4bVU4R0E4ZTFlZ20zaUNBM1lGbnNGT0NLcXpXUVhsY2ZiT1ppX0VkeFNfOUdwMjAxdjA3R0xJcXVkU2h6dF8wSklyRzE1NWVOU1R3R3lDMGJzcXgxb3U2ZlhaMzdwejl4MFFOX3d6UVBXRU05Vk1kbG5CSk1ydksxenF2S1RUMDk1SEV5SFcybmFQbW9aRFZuQzF6VWp5bnBDYjRONlZBVjNIRXZQQnBNTWhEd0l3dEg3VDZvZkQxVUducEVMeHh1VlpER3c5Q2lrUEk1WUtmX3RVZkNPRTdpeGp2bk10Zkd1STZrbHhnY0JZYWYtTE1KenV5cnlBZmExa3FjQmk0UXpKWV9MbDhpRU1vQWZuQXZxbms3cnFJcVdmUWQ2aEhDVEJPR0M3Y2xUVHdPN2ZhR29iNFllNjQ3YXNUT21HZ1hmWlExNWI3TExfNTBDSXNRRG8yVDc4T2NFRFdfM3ZoWnd4bjgtYzl0aXFHNm91M2VpdTA2dXJOZXNXOWpEZXRjMkdlcmxSZ2hwaDh1clIyU3dKWEFFNm4wSHJOeU80RjcyQkxUY093dzhVdlpGVTlfZXEzVVVqQURnYkppa056WGFISGVzVFBzWmc3bFZzNmo1MTBlSUx2R21BNE5tdFZacXFJZHBRRjZxWGR4QTVUUnNHQlpQYjF2M0xZeVRNRW96OW5taFVacFVieDUyQ0R4NXRIdVYxdw==","email":"an.tv@amigo.vn"},"registry.redhat.io":{"auth":"fHVoYy1wb29sLTZjMWZjN2M4LTYxNzctNDVjMi1hMTUwLWE0YmZhNzJmZjE2MzpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTNOalEzWlRJd05tWXpOVEkwTVRrd1lXRTBNVEU0Tm1WbU4yTTFZV000WlNKOS5xREdIRGJXVHFKQXdlMjRqRVhoSTZmWTdCM0JieWJEUkY5UGJ1SDEwdlFtU3JSYzdXUG1qSGhHeHhWU2pwNUt4dUJLWTRVX3FZMV9ZTVpsOXV3OXhLR1NlWGtiMUdYYU5MZ1l4OUo4ZTlHVUVYWk1hY2hjTTBfSkNsdURiVnUzd0JhZTU3dUU2SlF3M1JkLXplSXl4bVU4R0E4ZTFlZ20zaUNBM1lGbnNGT0NLcXpXUVhsY2ZiT1ppX0VkeFNfOUdwMjAxdjA3R0xJcXVkU2h6dF8wSklyRzE1NWVOU1R3R3lDMGJzcXgxb3U2ZlhaMzdwejl4MFFOX3d6UVBXRU05Vk1kbG5CSk1ydksxenF2S1RUMDk1SEV5SFcybmFQbW9aRFZuQzF6VWp5bnBDYjRONlZBVjNIRXZQQnBNTWhEd0l3dEg3VDZvZkQxVUducEVMeHh1VlpER3c5Q2lrUEk1WUtmX3RVZkNPRTdpeGp2bk10Zkd1STZrbHhnY0JZYWYtTE1KenV5cnlBZmExa3FjQmk0UXpKWV9MbDhpRU1vQWZuQXZxbms3cnFJcVdmUWQ2aEhDVEJPR0M3Y2xUVHdPN2ZhR29iNFllNjQ3YXNUT21HZ1hmWlExNWI3TExfNTBDSXNRRG8yVDc4T2NFRFdfM3ZoWnd4bjgtYzl0aXFHNm91M2VpdTA2dXJOZXNXOWpEZXRjMkdlcmxSZ2hwaDh1clIyU3dKWEFFNm4wSHJOeU80RjcyQkxUY093dzhVdlpGVTlfZXEzVVVqQURnYkppa056WGFISGVzVFBzWmc3bFZzNmo1MTBlSUx2R21BNE5tdFZacXFJZHBRRjZxWGR4QTVUUnNHQlpQYjF2M0xZeVRNRW96OW5taFVacFVieDUyQ0R4NXRIdVYxdw==","email":"an.tv@amigo.vn"}}}'
+sshKey: |
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCVmwq1V+BxFe8kDsYYEX+QnirOXGWg626jcrvBtcFwTRWTTsJxTtpCQnNDzhA16eavR2aJ9TZfdY5smYTY8Z9vyhlwY218WBzT+NF0eBXKv1tzqgCIP5yjjNxr7t8yDBDO1Q8hCd5q3EHBHddtG3cIdj0tVMXggYrTUQ8c1V/UFW3JcIqKil5MquUjKoL/QMJFMuHfIzUrL4nBglFsqUDGB1J4bfOzUItNZvdh7lCthkuzW1KIKWCeGzYTw8wfBRwjNBImsoDkau7tOtEz5jqOMHfUcQ2dknhlsSiIoGv5Vzud/OVatlWQa5F4Wd4g/rKiYJcUfWqrvWTIAQf4xikUUwXCeIISVhovtuwpHEG0zHjo2/E7qiafsGCfVglpQHdTrXRnS6nD2J3LOFsLfPiSUFUPVD+9sqGf0SnkQe5mDs4WIhN7dELE/ibOADuIF/6yGkJ8NBsHh0AO5KPXQkOC2FbzA4s4g9hjxH0Vg0io4RWbWXaAOo1dkLlDtz8ilQs= root@bastion.mno2.cloud.lab

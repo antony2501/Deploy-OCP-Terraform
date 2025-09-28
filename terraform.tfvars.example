@@ -9,3 +9,16 @@ cluster_name = "my-ocp-cluster"  # Tên cluster - sẽ tạo folder /home/my-ocp
 # server_user     = "root"            # Username (default)
 # server_password = "123"             # Password (default)
 # server_ssh_port = 22                # SSH port (default)
+
+# OpenShift install-config.yaml variables
+base_domain          = "example.com"           # Base domain cho cluster
+machine_network_cidr = "10.128.0.0/14"        # Machine network CIDR
+service_network_cidr = "172.30.0.0/16"        # Service network CIDR
+api_vip              = "10.0.95.18"           # API VIP address
+ingress_vip          = "10.0.95.19"           # Ingress VIP address
+
+# vSphere configuration
+vsphere_server   = "vcenter.example.com"      # vSphere server address
+vsphere_user     = "administrator@vsphere.local"  # vSphere username
+vsphere_password = "your-vsphere-password"    # vSphere password
+vsphere_network  = "VM Network"               # vSphere network name

@@ -29,3 +29,57 @@ variable "server_ssh_port" {
   type        = number
   default     = 22
 }
+
+# Variables cho install-config.yaml
+variable "base_domain" {
+  description = "Base domain cho OpenShift cluster"
+  type        = string
+  default     = "cloud.lab"
+}
+
+variable "machine_network_cidr" {
+  description = "Machine network CIDR"
+  type        = string
+  default     = "10.128.0.0/14"
+}
+
+variable "service_network_cidr" {
+  description = "Service network CIDR"
+  type        = string
+  default     = "172.30.0.0/16"
+}
+
+variable "api_vip" {
+  description = "API VIP address"
+  type        = string
+}
+
+variable "ingress_vip" {
+  description = "Ingress VIP address"
+  type        = string
+}
+
+variable "vsphere_server" {
+  description = "vSphere server address"
+  type        = string
+  default     = "10.0.55.12"
+}
+
+variable "vsphere_user" {
+  description = "vSphere username"
+  type        = string
+  default     = "administrator@vsphere.local"
+}
+
+variable "vsphere_password" {
+  description = "vSphere password"
+  type        = string
+  sensitive   = true
+  default     = "VMware1!VMware1!"
+}
+
+variable "vsphere_network" {
+  description = "vSphere network name"
+  type        = string
+  default     = "PG-VLAN195"
+}
