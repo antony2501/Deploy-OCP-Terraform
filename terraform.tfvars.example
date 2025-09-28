@@ -18,7 +18,19 @@ api_vip              = "10.0.95.18"           # API VIP address
 ingress_vip          = "10.0.95.19"           # Ingress VIP address
 
 # vSphere configuration
-vsphere_server   = "vcenter.example.com"      # vSphere server address
-vsphere_user     = "administrator@vsphere.local"  # vSphere username
-vsphere_password = "your-vsphere-password"    # vSphere password
-vsphere_network  = "VM Network"               # vSphere network name
+vsphere_server   = "10.0.55.12"              # vSphere server address (default)
+vsphere_user     = "administrator@vsphere.local"  # vSphere username (default)
+vsphere_password = "VMware1!VMware1!"        # vSphere password (default)
+vsphere_network  = "PG-VLAN195"              # vSphere network name (default)
+
+# OpenShift installation
+openshift_version = "4.15.0"                 # OpenShift version
+worker_count      = 3                        # Number of worker nodes
+
+# vSphere infrastructure (CẦN ĐIỀN THÔNG TIN THỰC)
+datacenter_id    = "datacenter-123"          # vSphere datacenter ID
+resource_pool_id = "resgroup-456"            # vSphere resource pool ID  
+datastore_id     = "datastore-789"           # vSphere datastore ID
+host_system_id   = "host-101"                # vSphere host system ID
+network_id       = "dvportgroup-202"         # vSphere network ID
+ova_name         = "rhel-coreos-4.15"        # OVA template name

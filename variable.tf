@@ -83,3 +83,53 @@ variable "vsphere_network" {
   type        = string
   default     = "PG-VLAN195"
 }
+
+# OpenShift installation variables
+variable "openshift_version" {
+  description = "OpenShift version to install"
+  type        = string
+  default     = "4.15.0"
+}
+
+variable "worker_count" {
+  description = "Number of worker nodes"
+  type        = number
+  default     = 3
+}
+
+# vSphere infrastructure variables (cần được cung cấp)
+variable "datacenter_id" {
+  description = "vSphere datacenter ID"
+  type        = string
+}
+
+variable "resource_pool_id" {
+  description = "vSphere resource pool ID"
+  type        = string
+}
+
+variable "datastore_id" {
+  description = "vSphere datastore ID"
+  type        = string
+}
+
+variable "host_system_id" {
+  description = "vSphere host system ID"
+  type        = string
+}
+
+variable "network_id" {
+  description = "vSphere network ID"
+  type        = string
+}
+
+variable "folder" {
+  description = "vSphere folder path"
+  type        = string
+  default     = "/Amigo/vm/OCP-agent-base"
+}
+
+variable "ova_name" {
+  description = "OVA template name for OpenShift"
+  type        = string
+}
