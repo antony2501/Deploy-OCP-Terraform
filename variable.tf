@@ -9,7 +9,7 @@ variable "cluster_name" {
 variable "server_host" {
   description = "IP của server"
   type        = string
-  default     = "192.168.74.130"
+  default     = "192.168.10.20"
 }
 
 variable "server_user" {
@@ -21,7 +21,7 @@ variable "server_user" {
 variable "server_password" {
   description = "Password để SSH vào server"
   type        = string
-  default     = "123"
+  default     = "Amigo@123"
 }
 
 variable "server_ssh_port" {
@@ -40,7 +40,7 @@ variable "base_domain" {
 variable "machine_network_cidr" {
   description = "Machine network CIDR"
   type        = string
-  default     = "10.128.0.0/14"
+  default     = "10.0.98.0/24"
 }
 
 variable "service_network_cidr" {
@@ -81,55 +81,23 @@ variable "vsphere_password" {
 variable "vsphere_network" {
   description = "vSphere network name"
   type        = string
-  default     = "PG-VLAN195"
+  default     = "PG-VLAN198"
 }
 
-# OpenShift installation variables
-variable "openshift_version" {
-  description = "OpenShift version to install"
+variable "openshift_install_version" {
+  description = "OpenShift installer version to use (allowed: 4-16-20, 4-17-2, 4-18-10)"
   type        = string
-  default     = "4.15.0"
+  default     = "4-16-20"
+  validation {
+    condition = contains(["4-16-20", "4-17-2", "4-18-10"], var.openshift_install_version)
+    error_message = "openshift_install_version must be one of: 4-16-20, 4-17-2, 4-18-10."
+  }
 }
 
-variable "worker_count" {
-  description = "Number of worker nodes"
-  type        = number
-  default     = 3
-}
-
-# vSphere infrastructure variables (cần được cung cấp)
-variable "datacenter_id" {
-  description = "vSphere datacenter ID"
+# Optional explicit path/name for the installer on bastion. If empty, derived from version.
+variable "openshift_install_binary" {
+  description = "Name or absolute path of the openshift-install binary on the bastion host"
   type        = string
+  default     = ""
 }
 
-variable "resource_pool_id" {
-  description = "vSphere resource pool ID"
-  type        = string
-}
-
-variable "datastore_id" {
-  description = "vSphere datastore ID"
-  type        = string
-}
-
-variable "host_system_id" {
-  description = "vSphere host system ID"
-  type        = string
-}
-
-variable "network_id" {
-  description = "vSphere network ID"
-  type        = string
-}
-
-variable "folder" {
-  description = "vSphere folder path"
-  type        = string
-  default     = "/Amigo/vm/OCP-agent-base"
-}
-
-variable "ova_name" {
-  description = "OVA template name for OpenShift"
-  type        = string
-}
