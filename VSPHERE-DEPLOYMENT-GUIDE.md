@@ -16,20 +16,36 @@ Dựa trên thông tin từ `install-config.yaml`, hệ thống sẽ deploy trê
 
 ```
 Deploy-OCP-Terraform/
-├── vsphere-config.tf           # vSphere provider & data sources
-├── bootstrap-deployment.tf     # Main deployment module
-├── variable.tf                 # Root variables
-├── terraform.tfvars           # Configuration values
-├── install-config.yaml        # OpenShift config
-└── bootstrap-node/
-    ├── data-sources.tf        # vSphere data sources (module)
-    ├── bootstrap-vm.tf        # Bootstrap VM
-    ├── bootstrap-wait.tf      # Wait for bootstrap ready
-    ├── master-vms.tf          # Master VMs
-    ├── worker-vms.tf          # Worker VMs
-    ├── variables.tf           # Module variables
-    └── outputs.tf             # Module outputs
+├── .gitignore                 # Git ignore file
+├── vsphere-config.tf          # vSphere provider & data sources
+├── bootstrap-deployment.tf    # Main deployment module
+├── variable.tf                # Root variables
+├── terraform.tfvars          # Configuration values
+├── install-config.yaml       # OpenShift config
+├── providers.tf              # Terraform providers
+├── ocp-installer.tf          # OpenShift installer
+├── bastion-folder.tf         # Bastion folder creation
+├── guestinfo-parameters.tf   # Guestinfo parameters
+├── ocp-bootstrap.tf          # OCP bootstrap
+├── ocp-vms.tf                # OCP VMs
+└── bootstrap-node/           # Bootstrap node module
+    ├── data-sources.tf       # vSphere data sources (module)
+    ├── bootstrap-vm.tf       # Bootstrap VM
+    ├── bootstrap-wait.tf     # Wait for bootstrap ready
+    ├── master-vms.tf         # Master VMs
+    ├── worker-vms.tf         # Worker VMs
+    ├── variables.tf          # Module variables
+    └── outputs.tf            # Module outputs
 ```
+
+## 📝 Files được ignore bởi .gitignore:
+
+- `*.tfstate*` - Terraform state files
+- `.terraform/` - Terraform provider cache
+- `.terraform.lock.hcl` - Terraform lock file
+- `auth/`, `*.ign` - OpenShift installer files
+- `*.log` - Log files
+- `.DS_Store`, `Thumbs.db` - OS files
 
 ## 🚀 Các bước Deploy
 
@@ -64,10 +80,20 @@ bootstrap_ign_sha256 = "sha256_checksum"
 
 #### Cách 1: Deploy tự động (Khuyến nghị)
 ```bash
+# Lần đầu tiên - khởi tạo Terraform
 terraform init
+
+# Xem kế hoạch deployment
 terraform plan
+
+# Thực hiện deployment
 terraform apply
 ```
+
+#### Lưu ý về .gitignore:
+- File `.gitignore` đã được tạo để ignore các file không cần thiết
+- Các file như `*.tfstate`, `.terraform/`, `.terraform.lock.hcl` sẽ không được commit
+- Chỉ commit các file cấu hình cần thiết
 
 #### Cách 2: Deploy từng bước
 ```bash

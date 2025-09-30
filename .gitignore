@@ -1,0 +1,102 @@
+# ====== TERRAFORM FILES ======
+# Terraform state files
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Terraform lock files (sẽ được tạo khi chạy terraform init)
+.terraform.lock.hcl
+
+# Terraform directories
+.terraform/
+.terraform.lock.hcl
+
+# Terraform crash log files
+crash.log
+crash.*.log
+
+# Terraform override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform plan files
+*.tfplan
+*.tfplan.*
+
+# Terraform CLI configuration files
+.terraformrc
+terraform.rc
+
+# ====== OPENSHIFT INSTALLER FILES ======
+# OpenShift installer generated files
+auth/
+bootstrap.ign
+master.ign
+worker.ign
+metadata.json
+.openshift_install.log
+.openshift_install_state.json
+
+# Install config backup
+install-config.yaml.backup
+
+# ====== SSH KEYS ======
+# SSH private keys
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# ====== LOGS ======
+# Log files
+*.log
+logs/
+
+# ====== TEMPORARY FILES ======
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# ====== IDE FILES ======
+# VS Code
+.vscode/
+*.code-workspace
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# ====== OS FILES ======
+# Windows
+*.lnk
+desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# ====== BACKUP FILES ======
+# Backup files
+*.bak
+*.backup
+*.old
+
+# ====== SENSITIVE FILES ======
+# Files that might contain sensitive information
+secrets/
+*.secret
+*.env
+.env*
+
+# ====== CUSTOM IGNORES ======
+# Add any project-specific files to ignore here
