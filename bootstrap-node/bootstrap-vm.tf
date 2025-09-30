@@ -30,9 +30,6 @@ resource "vsphere_virtual_machine" "bootstrap" {
   extra_config = {
     "stealclock.enable"                        = "TRUE"
     "disk.EnableUUID"                          = "TRUE"
-    "guestinfo.ignition.config.url"            = "http://${var.bastion_ip}/ocp-bootstrap-deploy/${var.cluster_name}/bootstrap.ign"
-    "guestinfo.ignition.config.url.sha256"     = var.bootstrap_ign_sha256 # optional nếu bạn có checksum
-    "guestinfo.afterburn.initrd.network-kargs" = "ip=10.0.98.80::10.0.98.1:255.255.255.0:bootstrap.oc1.cloud.lab:ens192:none nameserver=10.1.102.42"
   }
 
   tags = var.vm_tags
