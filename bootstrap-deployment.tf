@@ -26,7 +26,6 @@ module "bootstrap_nodes" {
   # Lưu ý: Các giá trị này cần được cung cấp sau khi chạy openshift-install
   master_ign_base64 = var.master_ign_base64
   worker_ign_base64 = var.worker_ign_base64
-  bootstrap_ign_sha256 = var.bootstrap_ign_sha256
   
   depends_on = [
     # Đảm bảo vSphere data sources đã được tạo

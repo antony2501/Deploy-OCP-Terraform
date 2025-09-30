@@ -140,10 +140,7 @@ variable "worker_ign_base64" {
   default     = ""
 }
 
-variable "bootstrap_ign_sha256" {
-  description = "SHA256 checksum of bootstrap ignition configuration"
-  type        = string
-  default     = ""
+lt     = ""
 }
 
 variable "openshift_install_version" {
@@ -156,10 +153,5 @@ variable "openshift_install_version" {
   }
 }
 
-# Optional explicit path/name for the installer on bastion. If empty, derived from version.
-variable "openshift_install_binary" {
-  description = "Name or absolute path of the openshift-install binary on the bastion host"
-  type        = string
-  default     = ""
-}
+
 

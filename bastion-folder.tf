@@ -70,8 +70,8 @@ resource "null_resource" "bastion_setup" {
   # 3) Sinh ignition configs trực tiếp vào folder của cluster
   provisioner "remote-exec" {
     inline = [
-      "INSTALLER=\"${var.openshift_install_binary}\"; if [ -z \"$INSTALLER\" ]; then INSTALLER=openshift-install-${var.openshift_install_version}; fi;",
-      "cd /home/${var.cluster_name} && $INSTALLER create ignition-configs --dir=/home/${var.cluster_name}",
+      "cd /home/${var.cluster_name}",
+      "openshift-install create ignition-configs --dir=/home/${var.cluster_name}",
       "ls -l /home/${var.cluster_name} | grep -E 'bootstrap.ign|master.ign|worker.ign' || true",
       "echo 'Ignition files generated in /home/${var.cluster_name}'"
     ]
