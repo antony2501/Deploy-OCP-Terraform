@@ -3,7 +3,7 @@ variable "cluster_name" { type = string }
 # vSphere lookups
 variable "vsphere_datacenter_name"  { type = string }
 variable "vsphere_datastore_name"   { type = string }
-variable "vsphere_portgroup_name"   { type = string }
+variable "vsphere_portgroup_name"   { type = string }  # Tương ứng với vsphere_network
 variable "vsphere_resource_pool_path" { type = string } # ví dụ: "/Amigo/host/Amigo/Resources"
 variable "vsphere_folder"           { type = string }   # ví dụ: "/Amigo/vm/OCP-agent-base"
 variable "template_vm_name"         { type = string }   # tên template VM đã tạo từ OVA

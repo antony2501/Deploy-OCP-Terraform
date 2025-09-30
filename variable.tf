@@ -81,7 +81,69 @@ variable "vsphere_password" {
 variable "vsphere_network" {
   description = "vSphere network name"
   type        = string
-  default     = "PG-VLAN198"
+  default     = "PG-VLAN195"
+}
+
+# vSphere Infrastructure Variables
+variable "vsphere_datacenter_name" {
+  description = "vSphere datacenter name"
+  type        = string
+  default     = "Amigo"
+}
+
+variable "vsphere_datastore_name" {
+  description = "vSphere datastore name"
+  type        = string
+  default     = "AMIGO LAB 02"
+}
+
+variable "vsphere_resource_pool_path" {
+  description = "vSphere resource pool path"
+  type        = string
+  default     = "/Amigo/host/Amigo/Resources"
+}
+
+variable "vsphere_folder" {
+  description = "vSphere folder path for VMs"
+  type        = string
+  default     = "/Amigo/vm/CPlabs"
+}
+
+variable "template_vm_name" {
+  description = "Name of the template VM to clone from"
+  type        = string
+  default     = "rhel-8-ocp-template"
+}
+
+variable "bastion_ip" {
+  description = "IP address of the bastion server"
+  type        = string
+  default     = "192.168.10.20"
+}
+
+variable "vm_tags" {
+  description = "Tags to apply to VMs"
+  type        = list(string)
+  default     = ["openshift", "ocp", "kubernetes"]
+}
+
+# Ignition configuration variables (cần được tạo từ OpenShift installer)
+variable "master_ign_base64" {
+  description = "Base64 encoded master ignition configuration"
+  type        = string
+  default     = ""
+}
+
+variable "worker_ign_base64" {
+  description = "Base64 encoded worker ignition configuration"
+  type        = string
+  default     = ""
+}
+
+variable "bootstrap_ign_sha256" {
+  description = "SHA256 checksum of bootstrap ignition configuration"
+  type        = string
+  default     = ""
 }
 
 variable "openshift_install_version" {
