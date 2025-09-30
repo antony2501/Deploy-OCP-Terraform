@@ -77,6 +77,31 @@ resource "null_resource" "bastion_setup" {
     ]
   }
 
+  # 4) Tạo thư mục web server và copy bootstrap.ign
+  provisioner "remote-exec" {
+    inline = [
+      "WEB_DIR=\"/var/www/html/ocp-bootstrap-deploy/${var.cluster_name}\"",
+      "mkdir -p $WEB_DIR",
+      "cp /home/${var.cluster_name}/bootstrap.ign $WEB_DIR/bootstrap.ign",
+      "chmod 644 $WEB_DIR/bootstrap.ign",
+      "echo 'Bootstrap ignition file copied to web server: $WEB_DIR/bootstrap.ign'"
+    ]
+  }
+
+  # 5) Base64 encode các file ignition và lưu vào file
+  provisioner "remote-exec" {
+    inline = [
+      "cd /home/${var.cluster_name}",
+      "echo 'Base64 encoding ignition files...'",
+      "base64 -w 0 bootstrap.ign > bootstrap.ign.base64",
+      "base64 -w 0 master.ign > master.ign.base64", 
+      "base64 -w 0 worker.ign > worker.ign.base64",
+      "echo 'Base64 encoded files created:'",
+      "ls -l *.ign.base64",
+      "echo 'Bootstrap URL: http://${var.server_host}/ocp-bootstrap-deploy/${var.cluster_name}/bootstrap.ign'"
+    ]
+  }
+
   # Kết nối SSH áp dụng cho cả hai provisioners phía trên
   connection {
     type     = "ssh"
@@ -98,6 +123,28 @@ output "install_config_path" {
   value       = "/home/${var.cluster_name}/install-config.yaml"
 }
 
+output "bootstrap_url" {
+  description = "URL để download bootstrap.ign"
+  value       = "http://${var.server_host}/ocp-bootstrap-deploy/${var.cluster_name}/bootstrap.ign"
+}
+
+output "ignition_files_path" {
+  description = "Đường dẫn các file ignition"
+  value = {
+    bootstrap = "/home/${var.cluster_name}/bootstrap.ign"
+    master    = "/home/${var.cluster_name}/master.ign"
+    worker    = "/home/${var.cluster_name}/worker.ign"
+    base64_bootstrap = "/home/${var.cluster_name}/bootstrap.ign.base64"
+    base64_master    = "/home/${var.cluster_name}/master.ign.base64"
+    base64_worker    = "/home/${var.cluster_name}/worker.ign.base64"
+  }
+}
+
+output "web_server_path" {
+  description = "Đường dẫn web server cho bootstrap.ign"
+  value       = "/var/www/html/ocp-bootstrap-deploy/${var.cluster_name}/bootstrap.ign"
+}
+
 output "server_info" {
   description = "Thông tin server"
   value = {
@@ -105,6 +152,7 @@ output "server_info" {
     user = var.server_user
     folder_created = "/home/${var.cluster_name}"
     install_config = "/home/${var.cluster_name}/install-config.yaml"
+    bootstrap_url = "http://${var.server_host}/ocp-bootstrap-deploy/${var.cluster_name}/bootstrap.ign"
   }
 }
 

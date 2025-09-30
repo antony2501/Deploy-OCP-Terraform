@@ -10,7 +10,7 @@ variable "template_vm_name"         { type = string }   # tên template VM đã 
 
 # Bastion + bootstrap URL
 variable "bastion_ip" { type = string }                 # ví dụ: "192.168.10.20"
-variable "bootstrap_ign_sha256" { type = string, default = "" } # tùy chọn
+# variable "bootstrap_ign_sha256" { type = string, default = "" } # tùy chọn
 
 # Ignition base64 (đã encode trước hoặc lấy từ Terraform output bạn đã tạo)
 variable "master_ign_base64" { type = string }
