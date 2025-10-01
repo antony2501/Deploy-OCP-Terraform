@@ -112,7 +112,7 @@ variable "vsphere_folder" {
 variable "template_vm_name" {
   description = "Name of the template VM to clone from"
   type        = string
-  default     = "rhel-8-ocp-template"
+  default     = "tmp-coreos-ocp-4-16-20"
 }
 
 variable "bastion_ip" {
@@ -140,8 +140,7 @@ variable "worker_ign_base64" {
   default     = ""
 }
 
-lt     = ""
-}
+
 
 variable "openshift_install_version" {
   description = "OpenShift installer version to use (allowed: 4-16-20, 4-17-2, 4-18-10)"

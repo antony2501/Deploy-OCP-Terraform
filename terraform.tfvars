@@ -21,7 +21,7 @@ vsphere_resource_pool_path = "/Amigo/host/Amigo/Resources"
 vsphere_folder = "/Amigo/vm/CPlabs"  # Đã cập nhật từ install-config.yaml
 
 # Template VM name (cần cập nhật theo template thực tế)
-template_vm_name = "rhel-8-ocp-template"  # Cần thay đổi theo template thực tế
+template_vm_name = "tmp-coreos-ocp-4-16-20"  # Cần thay đổi theo template thực tế
 
 # Network Configuration
 machine_network_cidr = "10.0.98.0/24"
